@@ -3,7 +3,7 @@
 int main()
 {
 	Window window{1280, 720, "Persistent Buffers"};
-	window.preInit();
+	window.preInit(4, 6);
 	window.create();
 	window.postInit();
 	while (!window.isCloseRequested())

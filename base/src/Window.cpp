@@ -60,7 +60,7 @@ void Window::render() const
 	glfwPollEvents();
 }
 
-void Window::preInit()
+void Window::preInit(const unsigned int major, const unsigned int minor)
 {
 	if (!glfwInit())
 	{
@@ -69,8 +69,8 @@ void Window::preInit()
 	}
 	Log::trace("GLFW initialized.");
 	glfwDefaultWindowHints();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_FALSE);
 }

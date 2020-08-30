@@ -18,7 +18,7 @@ public:
 	void setTitle(const char* title);
 	const GLFWwindow* getNativeHandle() const;
 	void render() const;
-	void preInit();
+	void preInit(const unsigned int major, const unsigned int minor);
 	void create();
 	void postInit();
 	const bool isCloseRequested() const;
