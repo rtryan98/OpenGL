@@ -1,2 +1,5 @@
 # CMake Build Files
 build/
+
+# Build results
+bin/
