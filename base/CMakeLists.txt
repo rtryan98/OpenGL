@@ -1,0 +1,20 @@
+file(GLOB_RECURSE BASE_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE BASE_H "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+
+add_library(Base STATIC ${BASE_SRC} ${BASE_H})
+target_link_libraries(Base glad glfw)
+target_include_directories(Base PUBLIC ${CMAKE_SOURCE_DIR}/submodules/glm/)
+
+# Filters for Visual Studio
+foreach(item IN ITEMS ${BASE_SRC})
+    get_filename_component(src_path "${item}" PATH)
+    string(REPLACE "${CMAKE_SOURCE_DIR}" "" group_path "${src_path}")
+    string(REPLACE "/" "\\" group_path "${group_path}")
+    source_group("${group_path}" FILES "${item}")
+endforeach()
+foreach(item IN ITEMS ${BASE_H})
+    get_filename_component(src_path "${item}" PATH)
+    string(REPLACE "${CMAKE_SOURCE_DIR}" "" group_path "${src_path}")
+    string(REPLACE "/" "\\" group_path "${group_path}")
+    source_group("${group_path}" FILES "${item}")
+endforeach()
