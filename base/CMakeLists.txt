@@ -3,7 +3,7 @@ file(GLOB_RECURSE BASE_H "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 
 add_library(Base STATIC ${BASE_SRC} ${BASE_H})
 target_link_libraries(Base glad glfw)
-target_include_directories(Base PUBLIC ${CMAKE_SOURCE_DIR}/submodules/glm/)
+target_include_directories(Base PUBLIC ${CMAKE_SOURCE_DIR}/vendor/glm/)
 
 # Filters for Visual Studio
 foreach(item IN ITEMS ${BASE_SRC})

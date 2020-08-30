@@ -76,7 +76,8 @@ namespace File
 {
 	const char* fileToString(const char* path)
 	{
-		std::string result;
+		static std::string result;
+		result.clear();
 		std::ifstream input;
 		input.open(path);
 		if (input.fail())

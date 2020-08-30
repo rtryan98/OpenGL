@@ -49,7 +49,7 @@ void Window::setTitle(const char* title)
 	glfwSetWindowTitle(handle, title);
 }
 
-const GLFWwindow* Window::getNativeHandle() const
+GLFWwindow* Window::getNativeHandle()
 {
 	return handle;
 }
@@ -73,6 +73,7 @@ void Window::preInit(const unsigned int major, const unsigned int minor)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 }
 
 void Window::create()
@@ -99,4 +100,9 @@ const bool Window::isCloseRequested() const
 void Window::close()
 {
 	glfwSetWindowShouldClose(handle, true);
+}
+
+const bool Window::isKeyPressed(const unsigned int keycode) const
+{
+	return glfwGetKey(handle, keycode);
 }
