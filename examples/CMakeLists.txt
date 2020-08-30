@@ -5,6 +5,7 @@ function(BuildSingleExample EXAMPLE_NAME)
 	file(GLOB SOURCE ${EXAMPLE_FOLDER}/*.cpp ${EXAMPLE_FOLDER}/*.h)
 	add_executable(${EXAMPLE_NAME} ${SOURCE})
     target_link_libraries(${EXAMPLE_NAME} Base)
+    target_include_directories(${EXAMPLE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/base/src/)
     set_target_properties(${EXAMPLE_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
     
     # Filters for Visual Studio
