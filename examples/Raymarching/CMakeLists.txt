@@ -7,14 +7,14 @@ function(BuildSingleExample EXAMPLE_NAME)
     target_link_libraries(${EXAMPLE_NAME} Base)
     target_include_directories(${EXAMPLE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/base/src/)
     if ( MSVC )
-    set_target_properties(${EXAMPLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Postprocessing/${EXAMPLE_NAME}/)
-    set_target_properties(${EXAMPLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Postprocessing/${EXAMPLE_NAME}/)
-    set_target_properties(${EXAMPLE_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/Postprocessing/${EXAMPLE_NAME}/)
+    set_target_properties(${EXAMPLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Raymarching/${EXAMPLE_NAME}/)
+    set_target_properties(${EXAMPLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Raymarching/${EXAMPLE_NAME}/)
+    set_target_properties(${EXAMPLE_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/Raymarching/${EXAMPLE_NAME}/)
     endif ( MSVC )
     # Copy data
     if(NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_CURRENT_BINARY_DIR)
         if(EXISTS ${EXAMPLE_FOLDER}/res/)
-            file(COPY ${EXAMPLE_FOLDER}/res/ DESTINATION ${CMAKE_BINARY_DIR}/bin/Postprocessing/${EXAMPLE_NAME}/res/)
+            file(COPY ${EXAMPLE_FOLDER}/res/ DESTINATION ${CMAKE_BINARY_DIR}/bin/Raymarching/${EXAMPLE_NAME}/res/)
         endif()
     endif()
     # Filters for Visual Studio
@@ -28,7 +28,7 @@ endfunction(BuildSingleExample)
 
 # list all examples
 set(EXAMPLES
-	Bloom 
+	Mandelbulb 
 )
 
 # build all examples

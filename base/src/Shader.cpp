@@ -3,7 +3,7 @@
 #include "Util.h"
 
 Shader::Shader()
-	: id(glCreateProgram()), uniformLocationCache()
+	: id(0), uniformLocationCache()
 {
 
 }
@@ -11,6 +11,11 @@ Shader::Shader()
 Shader::~Shader()
 {
 	glDeleteProgram(id);
+}
+
+void Shader::create()
+{
+	id = glCreateProgram();
 }
 
 void Shader::addShader(const char* path, const GLenum type)
@@ -77,32 +82,37 @@ void Shader::unbind() const
 
 void Shader::setUniform4f(const std::string& name, const float x, const float y, const float z, const float w) const
 {
-	glUniform4f(getUniformLocation(name), x, y, z, w);
+	glProgramUniform4f(id, getUniformLocation(name), x, y, z, w);
 }
 
 void Shader::setUniform3f(const std::string& name, const float x, const float y, const float z) const
 {
-	glUniform3f(getUniformLocation(name), x, y, z);
+	glProgramUniform3f(id, getUniformLocation(name), x, y, z);
 }
 
 void Shader::setUniform2f(const std::string& name, const float x, const float y) const
 {
-	glUniform2f(getUniformLocation(name), x, y);
+	glProgramUniform2f(id, getUniformLocation(name), x, y);
 }
 
 void Shader::setUniform1f(const std::string& name, const float val) const
 {
-	glUniform1f(getUniformLocation(name), val);
+	glProgramUniform1f(id, getUniformLocation(name), val);
 }
 
 void Shader::setUniformmat4f(const std::string& name, const glm::mat4& val) const
 {
-	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &val[0][0]);
+	glProgramUniformMatrix4fv(id, getUniformLocation(name), 1, GL_FALSE, &val[0][0]);
 }
 
 void Shader::setUniform1i(const std::string& name, const int val) const
 {
-	glUniform1i(getUniformLocation(name), val);
+	glProgramUniform1i(id, getUniformLocation(name), val);
+}
+
+void Shader::dispatch(const unsigned int sizeX, const unsigned int sizeY, const unsigned int sizeZ) const
+{
+	glDispatchCompute(sizeX, sizeY, sizeZ);
 }
 
 GLint Shader::getUniformLocation(const std::string& name) const

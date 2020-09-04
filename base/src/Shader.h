@@ -13,6 +13,7 @@ public:
 	Shader(const Shader& other) = delete;
 	Shader(const Shader&& other) = delete;
 	~Shader();
+	void create();
 	void addShader(const char* path, const GLenum type);
 	void compile();
 	void bind() const;
@@ -23,6 +24,7 @@ public:
 	void setUniform1f(const std::string& name, const float val) const;
 	void setUniform1i(const std::string& name, const int val) const;
 	void setUniformmat4f(const std::string& name, const glm::mat4& val) const;
+	void dispatch(const unsigned int sizeX, const unsigned int sizeY, const unsigned int sizeZ) const;
 private:
 	GLint getUniformLocation(const std::string& name) const;
 private:

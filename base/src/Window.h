@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class Window
 {
@@ -24,6 +25,8 @@ public:
 	const bool isCloseRequested() const;
 	void close();
 	const bool isKeyPressed(const unsigned int keycode) const;
+	const bool isMouseButtonPressed(const unsigned int mouseButton) const;
+	const glm::dvec2 getMousePosition() const;
 private:
 	const char* title;
 	unsigned int width;

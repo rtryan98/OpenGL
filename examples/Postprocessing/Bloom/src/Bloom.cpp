@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
 	OpenGL::initDebugCallback();
 	// setup the shaders used.
 	Shader screenQuadShader{};
+	screenQuadShader.create();
 	screenQuadShader.addShader("res/shader/quad.vert.glsl", GL_VERTEX_SHADER);
 	screenQuadShader.addShader("res/shader/quad.frag.glsl", GL_FRAGMENT_SHADER);
 	screenQuadShader.compile();
@@ -56,7 +57,7 @@ int main(int argc, char* argv[])
 			window.close();
 		}
 	}
-	// cleanup unused memory.
+	// cleanup
 	glDeleteBuffers(1, &screenQuadVbo);
 	glDeleteVertexArrays(1, &screenQuadVao);
 

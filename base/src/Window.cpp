@@ -3,6 +3,7 @@
 #include "Util.h"
 
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 Window::Window(const unsigned int width, const unsigned int height, const char* title)
 	: width(width), height(height), title(title)
@@ -105,4 +106,16 @@ void Window::close()
 const bool Window::isKeyPressed(const unsigned int keycode) const
 {
 	return glfwGetKey(handle, keycode);
+}
+
+const bool Window::isMouseButtonPressed(const unsigned int mouseButton) const
+{
+	return glfwGetMouseButton(handle, mouseButton);
+}
+
+const glm::dvec2 Window::getMousePosition() const
+{
+	double x{}, y{};
+	glfwGetCursorPos(handle, &x, &y);
+	return glm::dvec2{x, y};
 }
