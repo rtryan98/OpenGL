@@ -1,5 +1,5 @@
 # OpenGL Sample Repository
-In this repository I will upload commented samples in which serval grapchics and / or API concepts will be explained and shown.
+In this repository I will upload commented samples in which serval graphics and / or API concepts will be explained and shown.
 Tutorials will follow.
 
 ## Screenshots
