@@ -1,7 +1,7 @@
 #include <Base.h>
 
-constexpr unsigned int width = 1280;
-constexpr unsigned int height = 720;
+constexpr unsigned int width = 1600;
+constexpr unsigned int height = 900;
 constexpr char* title = "Mandelbulb";
 
 Window window{ width, height, title };
