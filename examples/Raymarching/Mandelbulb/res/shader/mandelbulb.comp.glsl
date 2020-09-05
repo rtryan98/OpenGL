@@ -41,7 +41,7 @@ vec2 mandelbulb(vec3 position)
 	float dr = 1.0;
 	float r = 0.0;
 	uint iteration = 0;
-	for(uint i = 0; i < 7; i++)
+	for(uint i = 0; i < 15; i++)
 	{
 		iteration = i;
 		r = length(z);
