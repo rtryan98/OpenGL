@@ -1,0 +1,19 @@
+title: OpenGL 4.6 Tutorial
+lang: en
+description: OpenGL 4.6 minimal tutorials
+
+remote_theme: rundocs/jekyll-rtd-theme
+
+addons_branch: true
+edit: false
+
+addons:
+  - github
+  - i18n
+  - plugins
+
+copyright:
+  revision: true
+  
+readme_index:
+  with_frontmatter: true
