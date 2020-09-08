@@ -17,3 +17,5 @@ copyright:
   
 readme_index:
   with_frontmatter: true
+
+rougify: base16.dark
