@@ -72,10 +72,13 @@ constexpr float triangle[]
 
 void initVertexBuffers()
 {
+	// screenquad
 	glCreateBuffers(1, &quadVbo);
 	glNamedBufferStorage(quadVbo, 16 * sizeof(float), screenQuad, 0x0);
 	// This quad is immutable by all means, thus flags is 0.
 	glVertexArrayVertexBuffer(quadVao, 0, quadVbo, 0, 4 * sizeof(float));
+
+	// triangle
 	glCreateBuffers(1, &triangleVbo);
 	glNamedBufferStorage(triangleVbo, 6 * sizeof(float), triangle, 0x0);
 	// This triangle is immutable by all means, thus flags is 0.
@@ -83,10 +86,36 @@ void initVertexBuffers()
 }
 
 uint32_t fbo{};
+uint32_t fboColorTextureAttachment{};
+uint32_t rbo{};
 
 void initFramebuffers()
 {
+	// create the framebuffer
 	glCreateFramebuffers(1, &fbo);
+
+	// create the color texture attachment
+	glCreateTextures(GL_TEXTURE_2D, 1, &fboColorTextureAttachment);
+	glTextureStorage2D(fboColorTextureAttachment, 1, GL_RGB8, width, height);
+	glTextureParameteri(fboColorTextureAttachment, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTextureParameteri(fboColorTextureAttachment, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// attach the texture to the framebuffer
+	glNamedFramebufferTexture(fbo, GL_COLOR_ATTACHMENT0, fboColorTextureAttachment, 0);
+
+	// create a render buffer object and the depth attachment
+	glCreateRenderbuffers(1, &rbo);
+	glNamedRenderbufferStorage(rbo, GL_DEPTH24_STENCIL8, width, height);
+	glNamedFramebufferRenderbuffer(fbo, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+	// check if the framebuffer is complete
+	if (glCheckNamedFramebufferStatus(fbo, GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+	{
+		Log::info("Framebuffer is complete!");
+	}
+	else
+	{
+		Log::warn("Framebuffer is incomplete!");
+	}
 }
 
 int main(int argc, char* argv[])
@@ -106,7 +135,24 @@ int main(int argc, char* argv[])
 	// loop
 	while (!window.isCloseRequested())
 	{
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		triangleShader.bind();
+		glBindVertexArray(triangleVao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);
+		triangleShader.unbind(); // redundant call, but used for clarity
 
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// draw the screenquad with the scene
+		quadShader.bind();
+		glBindTextureUnit(0, fboColorTextureAttachment);
+		glBindVertexArray(quadVao);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glBindVertexArray(0);
+		glBindTextureUnit(0, 0);
+		quadShader.unbind();
 		// swap buffers and poll events
 		window.render();
 		if (window.isKeyPressed(GLFW_KEY_ESCAPE))
@@ -119,5 +165,7 @@ int main(int argc, char* argv[])
 	glDeleteBuffers(1, &triangleVbo);
 	glDeleteVertexArrays(1, &quadVao);
 	glDeleteVertexArrays(1, &triangleVao);
+	glDeleteRenderbuffers(1, &rbo);
 	glDeleteFramebuffers(1, &fbo);
+	glDeleteTextures(1, &fboColorTextureAttachment);
 }
