@@ -1,7 +1,7 @@
 ---
-sort: 4
+sort: 2
 ---
 
-# In Practice
+# Getting Started
 
 {% include list.liquid all=true %}

@@ -18,3 +18,6 @@ To build the samples, follow these steps:
 * [GLAD](https://github.com/Dav1dde/glad/blob/master/LICENSE) Copyright (c) MIT, David Herberth 2013-2020
 * [glfw](https://github.com/glfw/glfw/blob/master/LICENSE.md) Copyright (c) zlib, Camilla Löwy, 2006-2019
 * [glm](https://github.com/g-truc/glm/blob/master/copying.txt) Copyright (c) MIT, G-Truc Creation, 2005
+
+#### Website Licence Notice
+* [Rundocs Jekyll Theme](https://github.com/rundocs/jekyll-rtd-theme/blob/master/LICENSE) Copyright (c) MIT, RunDocs, 2020
