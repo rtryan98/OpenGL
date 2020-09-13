@@ -27,6 +27,7 @@ GLFW also requires a pointer to the window itself, so in total, our window will 
 * The width and height
 * The title
 * The pointer to the handle
+
 Which will look like this
 ```cpp
 class Window
