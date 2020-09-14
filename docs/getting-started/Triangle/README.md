@@ -1,8 +1,10 @@
 ---
-sort: 2
+sort: 3
 ---
 
 # The First Triangle
+
+The graphics API' "Hello World!" program: A triangle on the screen!
 
 Drawing something with OpenGL requires some code upfront. It might seem like a lot, but in ~100 lines of code you can already have your first window showing a triangle on screen!
 As a quick overview, we'll need to do the following:

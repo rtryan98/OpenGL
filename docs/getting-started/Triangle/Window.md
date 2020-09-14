@@ -1,5 +1,5 @@
 ---
-sort: 2
+sort: 1
 ---
 
 # Window
@@ -37,6 +37,8 @@ Window::Window(const unsigned int width, const unsigned int height, const char* 
     : width(width), height(height), title(title)
 {}
 ```
+
+### Initializing the Window
 We'll initialize the window in three steps: `preInit()`, which will setup GLFW and our default window hints such us the OpenGL version and profile, `create()`, which will create the window and `postInit()`, which will initialize our OpenGL loader.
 ```cpp
 void Window::preInit(const unsigned int versionMajor, const unsigned int versionMinor)
@@ -85,7 +87,7 @@ if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
 Log::trace("GLAD initialized.");
 }
 ```
-### Using the window
+### Using the Window
 To use our window, we'll simply create three new methods: `render()`, `isCloseRequested()` and `close()`.
 ```cpp
 void Window::render() const
