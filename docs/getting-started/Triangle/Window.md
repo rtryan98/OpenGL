@@ -1,20 +1,10 @@
 ---
-sort: 1
+sort: 2
 ---
 
 # Window
 The first thing that needs to be done to draw something with OpenGL is that we create a window. There are many libraries out there, but we'll be using GLFW. It's easy to use and fast to setup.
 You can also use your platform specific windowing system or another library, but in this tutorial, I won't go over other APIs for windowing and input handling.
-
-## GLFW
-[GLFW](https://www.glfw.org/) is a windowing library written in C, targeted at OpenGL but also usable for other APIs such as Vulkan or even Direct3D.
-It is available as prebuilt binaries or as source to build for yourself.
-GLFW will abstract all of the OS-specific windowing and input away from us and leave us with an easy to read and easy to understand API, which will jumpstart our OpenGL journey a lot.
-
-## GLAD
-By default, Windows and possible other operating systems don't offer support for OpenGL beyond 2.0 or even lower, for that reason, we require an *OpenGL loader library* to make newer versions available to use for us.
-The loader library which we will use is [GLAD](https://github.com/Dav1dde/glad). You can either [generate](https://glad.dav1d.de/) your OpenGL loader to your wishes or you can download my premade [CMake version](https://github.com/rtryan98/glad).
-If you wish to generate it yourself, simply select your version, the core profile and the extensions you wish to use. Then click generate and download it! All you have to do now is add the `glad.c` file somewhere into your source folder and the `glad/` and `KHR/` directories into your include directory.
 
 ## Creating the Window class
 To use GLFW, we first have to include it with `#include <GLFW/glfw3.h>`. To create the most basic window, we'll only require 2 functions, namely `glfwInit()` and `glfwCreateWindow()`.
