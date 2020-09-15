@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
 	// setup the shaders used.
 	Shader screenQuadShader{};
 	screenQuadShader.create();
-	screenQuadShader.addShader("res/shader/quad.vert.glsl", GL_VERTEX_SHADER);
-	screenQuadShader.addShader("res/shader/quad.frag.glsl", GL_FRAGMENT_SHADER);
+	screenQuadShader.addShader("res/bloom/shader/quad.vert.glsl", GL_VERTEX_SHADER);
+	screenQuadShader.addShader("res/bloom/shader/quad.frag.glsl", GL_FRAGMENT_SHADER);
 	screenQuadShader.compile();
 	// setup the VAO's used.
 	GLuint screenQuadVao{};

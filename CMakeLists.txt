@@ -11,7 +11,5 @@ project(${NAME}
 	DESCRIPTION "OpenGL 4.6 Examples"
 	)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
-
 add_subdirectory(base)
 add_subdirectory(examples)

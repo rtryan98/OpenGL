@@ -77,7 +77,7 @@ The program will not compile when you include GLFW before GLAD. Make sure your i
 void Window::postInit()
 {
     // we need to make the context current before we initialize GLAD
-glfwMakeContextCurrent(handle);
+    glfwMakeContextCurrent(handle);
     // here we initialize GLAD
 if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
 {

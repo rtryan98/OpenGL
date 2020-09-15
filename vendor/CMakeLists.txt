@@ -1,2 +1,10 @@
 add_subdirectory(glad)
 add_subdirectory(glfw)
+add_subdirectory(tinyobjloader)
+
+if(EXISTS ${CMAKE_SOURCE_DIR}/vendor/sponza/)
+    file(COPY ${CMAKE_SOURCE_DIR}/vendor/sponza/ DESTINATION ${CMAKE_BINARY_DIR}/bin/res/Global/sponza)
+endif()
+if(EXISTS ${CMAKE_SOURCE_DIR}/vendor/common3dmodels/)
+    file(COPY ${CMAKE_SOURCE_DIR}/vendor/common3dmodels/ DESTINATION ${CMAKE_BINARY_DIR}/bin/res/Global/common3dmodels)
+endif()

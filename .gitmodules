@@ -7,3 +7,12 @@
 [submodule "vendor/glm"]
 	path = vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "vendor/tinyobjloader"]
+	path = vendor/tinyobjloader
+	url = https://github.com/tinyobjloader/tinyobjloader
+[submodule "vendor/common3dmodels"]
+	path = vendor/common3dmodels
+	url = https://github.com/alecjacobson/common-3d-test-models
+[submodule "vendor/sponza"]
+	path = vendor/sponza
+	url = https://github.com/jimmiebergmann/Sponza

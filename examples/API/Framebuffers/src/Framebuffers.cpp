@@ -19,12 +19,12 @@ Shader quadShader{};
 void initShaders()
 {
 	triangleShader.create();
-	triangleShader.addShader("res/shader/triangle.vert.glsl", GL_VERTEX_SHADER);
-	triangleShader.addShader("res/shader/triangle.frag.glsl", GL_FRAGMENT_SHADER);
+	triangleShader.addShader("res/framebuffers/shader/triangle.vert.glsl", GL_VERTEX_SHADER);
+	triangleShader.addShader("res/framebuffers/shader/triangle.frag.glsl", GL_FRAGMENT_SHADER);
 	triangleShader.compile();
 	quadShader.create();
-	quadShader.addShader("res/shader/quad.vert.glsl", GL_VERTEX_SHADER);
-	quadShader.addShader("res/shader/quad.frag.glsl", GL_FRAGMENT_SHADER);
+	quadShader.addShader("res/framebuffers/shader/quad.vert.glsl", GL_VERTEX_SHADER);
+	quadShader.addShader("res/framebuffers/shader/quad.frag.glsl", GL_FRAGMENT_SHADER);
 	quadShader.compile();
 }
 

@@ -12,4 +12,4 @@ As a quick overview, we'll need to do the following:
 2. Initialize our OpenGL loader
 3. Setup a debug callback so we can directly see an error when it happens and trace it back
 4. Create the data required to draw the triangle and send it to the GPU
-5. Create a shader program that runs on the gpu
+5. Create a shader program that runs on the GPU
