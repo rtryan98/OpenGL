@@ -162,7 +162,9 @@ int main(int argc, char* argv[])
 You'll see a black window in the specified size now and it shouldn't crash! If you press Escape on your keyboard, the window should close and the program will terminate!
 
 ### Source
-You can find the full source code of the window class here: [Window.cpp](https://github.com/rtryan98/OpenGL/blob/master/base/src/Window.cpp) [Window.h](https://github.com/rtryan98/OpenGL/blob/master/base/src/Window.h)
+You can find the full source code of the window class here: [Window.cpp](https://github.com/rtryan98/OpenGL/blob/master/base/src/Window.cpp) [Window.h](https://github.com/rtryan98/OpenGL/blob/master/base/src/Window.h) 
+
+You can find the full source of the Main file here: [Main.cpp](https://github.com/rtryan98/OpenGL/blob/master/examples/tutorial/Window/src/Main.cpp)
 
 ## Additional Resources
 * [Official GLFW window guide](https://www.glfw.org/docs/latest/window_guide.html)
