@@ -19,16 +19,19 @@ function(BuildSingleExample EXAMPLE_NAME)
     endif()
     # Filters for Visual Studio
     foreach(item IN ITEMS ${SOURCE})
-    get_filename_component(src_path "${item}" PATH)
-    string(REPLACE "${CMAKE_SOURCE_DIR}" "" group_path "${src_path}")
-    string(REPLACE "/" "\\" group_path "${group_path}")
-    source_group("${group_path}" FILES "${item}")
+        get_filename_component(src_path "${item}" PATH)
+        string(REPLACE "${CMAKE_SOURCE_DIR}" "" group_path "${src_path}")
+        string(REPLACE "/" "\\" group_path "${group_path}")
+        source_group("${group_path}" FILES "${item}")
     endforeach()
+    # Folder
+    set_target_properties(${EXAMPLE_NAME} PROPERTIES FOLDER Tutorial)
 endfunction(BuildSingleExample)
 
 # list all examples
 set(EXAMPLES
-	Window 
+    Window 
+    Models
 )
 
 # build all examples

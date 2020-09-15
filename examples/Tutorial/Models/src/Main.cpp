@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-	Window window{1600, 900, "Hello Window!"};
+	Window window{ 1600, 900, "Hello Model!" };
 	window.preInit(4, 6);
 	window.create();
 	window.postInit();

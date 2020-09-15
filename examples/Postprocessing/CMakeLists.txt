@@ -24,6 +24,7 @@ function(BuildSingleExample EXAMPLE_NAME)
     string(REPLACE "/" "\\" group_path "${group_path}")
     source_group("${group_path}" FILES "${item}")
     endforeach()
+    set_target_properties(${EXAMPLE_NAME} PROPERTIES FOLDER Postprocessing)
 endfunction(BuildSingleExample)
 
 # list all examples
