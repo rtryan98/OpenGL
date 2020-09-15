@@ -1,5 +1,7 @@
 #include <Base.h>
 
+
+
 int main(int argc, char* argv[])
 {
 	Window window{ 1600, 900, "Hello Model!" };

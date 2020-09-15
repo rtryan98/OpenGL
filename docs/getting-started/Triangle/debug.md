@@ -58,6 +58,7 @@ Inside of this method we can pretty much handle everything how we want. A very b
 * **length** is the length of the message string
 * **message** is the message
 * **user_param** those are user defined parameters we could use
+
 For now, the only parameters that really interest us are **source**, **type** and **severity**.
 An example implementation could look like this:
 ```cpp
@@ -67,29 +68,29 @@ void messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
 	{
 		switch (source)
 		{
-		case GL_DEBUG_SOURCE_API:				return "API";
-		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		return "WINDOW SYSTEM";
-		case GL_DEBUG_SOURCE_SHADER_COMPILER:	return "SHADER COMPILER";
-		case GL_DEBUG_SOURCE_THIRD_PARTY:		return "THIRD PARTY";
-		case GL_DEBUG_SOURCE_APPLICATION:		return "APPLICATION";
-		case GL_DEBUG_SOURCE_OTHER:				return "OTHER";
-		default:								return "NONE";
+		case GL_DEBUG_SOURCE_API: return "API";
+		case GL_DEBUG_SOURCE_WINDOW_SYSTEM: return "WINDOW SYSTEM";
+		case GL_DEBUG_SOURCE_SHADER_COMPILER: return "SHADER COMPILER";
+		case GL_DEBUG_SOURCE_THIRD_PARTY: return "THIRD PARTY";
+		case GL_DEBUG_SOURCE_APPLICATION: return "APPLICATION";
+		case GL_DEBUG_SOURCE_OTHER: return "OTHER";
+		default: return "NONE";
 		}
 	}();
 	const auto typeString = [type]()
 	{
 		switch (type)
 		{
-		case GL_DEBUG_TYPE_ERROR:				return "ERROR";
-		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:	return "DEPRECATED_BEHAVIOR";
-		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:	return "UNDEFINED_BEHAVIOR";
-		case GL_DEBUG_TYPE_PORTABILITY:			return "PORTABILITY";
-		case GL_DEBUG_TYPE_PERFORMANCE:			return "PERFORMANCE";
-		case GL_DEBUG_TYPE_MARKER:				return "MARKER";
-		case GL_DEBUG_TYPE_OTHER:				return "OTHER";
-		case GL_DEBUG_TYPE_POP_GROUP:			return "POP_GROUP";
-		case GL_DEBUG_TYPE_PUSH_GROUP:			return "PUSH_GROUP";
-		default:								return "NONE";
+		case GL_DEBUG_TYPE_ERROR: return "ERROR";
+		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: return "DEPRECATED_BEHAVIOR";
+		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR: return "UNDEFINED_BEHAVIOR";
+		case GL_DEBUG_TYPE_PORTABILITY: return "PORTABILITY";
+		case GL_DEBUG_TYPE_PERFORMANCE: return "PERFORMANCE";
+		case GL_DEBUG_TYPE_MARKER: return "MARKER";
+		case GL_DEBUG_TYPE_OTHER: return "OTHER";
+		case GL_DEBUG_TYPE_POP_GROUP: return "POP_GROUP";
+		case GL_DEBUG_TYPE_PUSH_GROUP: return "PUSH_GROUP";
+		default: return "NONE";
 		}
 	}();
 	switch (severity)
@@ -111,6 +112,14 @@ void messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
 		break;
 	}
 }
+```
+Now all we need to do is, after initializing OpenGL, initialize the Debug Callback with those 4 lines of code:
+```cpp
+glEnable(GL_DEBUG_OUTPUT);
+glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+glDebugMessageCallback(messageCallback, nullptr);
+// commenting this will enable notification-level messages from the Debug Callback
+glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE);
 ```
 
 ### Source
