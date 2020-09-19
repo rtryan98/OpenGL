@@ -61,10 +61,10 @@ void Shader::compile()
 	glGetProgramiv(id, GL_LINK_STATUS, &result);
 	if (result == false)
 	{
-		int length;
+		int length{};
 		glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
 		char* message = (char*)_malloca(sizeof(char) * length);
-		glGetProgramInfoLog(id, length, &length, message);
+		glGetProgramInfoLog(id, length, nullptr, message);
 		Log::error(message);
 	}
 	glValidateProgram(id);
@@ -100,7 +100,7 @@ void Shader::setUniform1f(const std::string& name, const float val) const
 	glProgramUniform1f(id, getUniformLocation(name), val);
 }
 
-void Shader::setUniformmat4f(const std::string& name, const glm::mat4& val) const
+void Shader::setUniformMat4f(const std::string& name, const glm::mat4& val) const
 {
 	glProgramUniformMatrix4fv(id, getUniformLocation(name), 1, GL_FALSE, &val[0][0]);
 }
@@ -117,7 +117,6 @@ void Shader::dispatch(const unsigned int sizeX, const unsigned int sizeY, const 
 
 GLint Shader::getUniformLocation(const std::string& name) const
 {
-
 	if (uniformLocationCache.find(name) != uniformLocationCache.end())
 	{
 		return uniformLocationCache[name];
