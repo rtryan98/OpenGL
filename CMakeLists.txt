@@ -7,9 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(NAME OpenglExamples)
 
 project(${NAME}
-	VERSION 1.0
-	DESCRIPTION "OpenGL 4.6 Examples"
-	)
+    VERSION 1.0
+    DESCRIPTION "OpenGL 4.6 Examples"
+    )
 
 add_subdirectory(base)
 add_subdirectory(examples)

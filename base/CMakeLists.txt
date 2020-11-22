@@ -8,7 +8,7 @@ set_target_properties(Base PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOU
 set_target_properties(Base PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/build/bin/)
 
 if ( MSVC )
-	set_target_properties(Base PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin/)
+    set_target_properties(Base PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin/)
 endif ( MSVC )
 
 target_link_libraries(Base glad glfw tinyobjloader)
