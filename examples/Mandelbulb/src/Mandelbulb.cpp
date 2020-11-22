@@ -19,11 +19,11 @@ Shader raycastShader{};
 void initShaders()
 {
     raycastShader.create();
-    raycastShader.addShader("mandelbulb/res/shader/mandelbulb.vert.glsl", GL_VERTEX_SHADER);
-    raycastShader.addShader("mandelbulb/res/shader/mandelbulb.frag.glsl", GL_FRAGMENT_SHADER);
+    raycastShader.addShader("mandelbulb/res/shader/mandelbulb.vert", GL_VERTEX_SHADER);
+    raycastShader.addShader("mandelbulb/res/shader/mandelbulb.frag", GL_FRAGMENT_SHADER);
     raycastShader.compile();
     raycastComputeShader.create();
-    raycastComputeShader.addShader("mandelbulb/res/shader/mandelbulb.comp.glsl", GL_COMPUTE_SHADER);
+    raycastComputeShader.addShader("mandelbulb/res/shader/mandelbulb.comp", GL_COMPUTE_SHADER);
     raycastComputeShader.compile();
 }
 

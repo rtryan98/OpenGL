@@ -92,8 +92,8 @@ int main(int argc, char* argv[])
     OpenGL::initDebugCallback();
     // init shaders
     shader.create();
-    shader.addShader("models/res/shader/model.vert.glsl", GL_VERTEX_SHADER);
-    shader.addShader("models/res/shader/model.frag.glsl", GL_FRAGMENT_SHADER);
+    shader.addShader("models/res/shader/model.vert", GL_VERTEX_SHADER);
+    shader.addShader("models/res/shader/model.frag", GL_FRAGMENT_SHADER);
     shader.compile();
     // init camera
     camera.init(90.0f, {0.0f, 0.0f, 0.0f}, 0.75f, 0.5f);
