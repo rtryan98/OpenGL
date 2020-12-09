@@ -121,18 +121,18 @@ int main(int argc, char* argv[])
     glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(Vertex));
     glVertexArrayElementBuffer(vao, ibo);
     // framebuffer clearcolor
-    float clearColor[]
+    float_t clearColor[]
     {
         0.0f, 0.0f, 0.0f, 1.0f
     };
-    float depth{ 1.0f };
+    float_t depth{ 1.0f };
     // init projection
     glm::mat4 projection = glm::perspective<float>(glm::radians(camera.getFov()), static_cast<float>(width) / static_cast<float>(height), 0.01f, 1000.0f);
     shader.setUniformMat4f(std::string("uProjection"), projection);
     // loop
-    float currentTime{};
-    float lastTime{};
-    float dt{};
+    float_t currentTime{};
+    float_t lastTime{};
+    float_t dt{};
     while (!window.isCloseRequested())
     {
         // update dt
