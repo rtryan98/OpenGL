@@ -125,6 +125,7 @@ int main(int argc, char* argv[])
     {
         0.0f, 0.0f, 0.0f, 1.0f
     };
+    float depth{ 1.0f };
     // init projection
     glm::mat4 projection = glm::perspective<float>(glm::radians(camera.getFov()), static_cast<float>(width) / static_cast<float>(height), 0.01f, 1000.0f);
     shader.setUniformMat4f(std::string("uProjection"), projection);
@@ -140,6 +141,7 @@ int main(int argc, char* argv[])
         lastTime = currentTime;
         // clear screen
         glClearNamedFramebufferfv(0, GL_COLOR, 0, clearColor);
+        glClearNamedFramebufferfv(0, GL_DEPTH, 0, &depth);
         // update camera
         camera.update(window, dt);
         updateCameraUniforms();
