@@ -1,0 +1,7 @@
+*.glsl linguist-language=glsl
+*.vert linguist-language=glsl
+*.tese linguist-language=glsl
+*.tesc linguist-language=glsl
+*.geom linguist-language=glsl
+*.frag linguist-language=glsl
+*.comp linguist-language=glsl
