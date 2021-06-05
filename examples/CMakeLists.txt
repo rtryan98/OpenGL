@@ -35,6 +35,7 @@ set(EXAMPLES
     Framebuffers 
     Mandelbulb 
     Models 
+    FFT-Ocean
 )
 
 # build all examples

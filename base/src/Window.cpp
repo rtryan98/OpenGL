@@ -67,6 +67,7 @@ void Window::preInit(const unsigned int major, const unsigned int minor)
     {
         glfwTerminate();
         Log::fatal("GLFW initialization failed!");
+        std::abort();
     }
     Log::trace("GLFW initialized.");
     glfwDefaultWindowHints();
