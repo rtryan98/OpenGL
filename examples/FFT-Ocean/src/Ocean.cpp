@@ -12,9 +12,9 @@ Window window{ width, height, title };
 
 Camera camera{};
 
-uint32_t oceanIBO{};
-uint32_t oceanVBO{};
 uint32_t oceanVAO{};
+uint32_t oceanVBO{};
+uint32_t oceanIBO{};
 
 struct Vertex
 {
@@ -106,19 +106,70 @@ void createGaussianRandomTexture()
             a = glm::floor(255.0f * a);
             b = glm::floor(255.0f * b);
 
-            textureData.push_back(static_cast<uint8_t>(a));
-            textureData.push_back(static_cast<uint8_t>(b));
+            uint8_t aInt{ static_cast<uint8_t>(a) };
+            uint8_t bInt{ static_cast<uint8_t>(b) };
+
+            textureData.push_back(aInt);
+            textureData.push_back(bInt);
         }
     }
 
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glCreateTextures(GL_TEXTURE_2D, 1, &randomTexture);
+
+    glTextureParameteri(randomTexture, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTextureParameteri(randomTexture, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTextureParameteri(randomTexture, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(randomTexture, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
     glTextureStorage2D(randomTexture, 1, GL_RG8, 256, 256);
     glTextureSubImage2D(randomTexture, 0, 0, 0, 256, 256, GL_RG, GL_UNSIGNED_BYTE, textureData.data());
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 }
+
+uint32_t debugVAO{};
+uint32_t debugVBO{};
 
 void createDebugGeometry()
 {
+    struct DebugVertex
+    {
+        glm::vec2 pos;
+        glm::vec2 uv;
+    };
 
+    std::vector<DebugVertex> debugVertices{};
+    debugVertices.push_back({ glm::vec2{0.0f, 0.0f}, glm::vec2{0.0f, 0.0f} });
+    debugVertices.push_back({ glm::vec2{128.0f, 0.0f}, glm::vec2{1.0f, 0.0f} });
+    debugVertices.push_back({ glm::vec2{0.0f, 128.0f}, glm::vec2{0.0f, 1.0f} });
+    debugVertices.push_back({ glm::vec2{128.0f, 128.0f}, glm::vec2{1.0f, 1.0f} });
+
+    glCreateBuffers(1, &debugVBO);
+    glNamedBufferStorage(debugVBO, sizeof(DebugVertex) * debugVertices.size(), debugVertices.data(), 0x0);
+
+    glCreateVertexArrays(1, &debugVAO);
+
+    glEnableVertexArrayAttrib(debugVAO, 0);
+    glVertexArrayAttribFormat(debugVAO, 0, 2, GL_FLOAT, GL_FALSE, offsetof(DebugVertex, pos));
+    glVertexArrayAttribBinding(debugVAO, 0, 0);
+
+    glEnableVertexArrayAttrib(debugVAO, 1);
+    glVertexArrayAttribFormat(debugVAO, 1, 2, GL_FLOAT, GL_FALSE, offsetof(DebugVertex, uv));
+    glVertexArrayAttribBinding(debugVAO, 1, 0);
+
+    glVertexArrayVertexBuffer(debugVAO, 0, debugVBO, 0, sizeof(DebugVertex));
+}
+
+Shader debugShader{};
+
+void drawDebugQuad(const glm::vec2& offset, float_t scale, uint32_t texture)
+{
+    glBindVertexArray(debugVAO);
+    glBindTextureUnit(0, texture);
+    debugShader.setUniform2f("uOffset", offset.x, offset.y);
+    debugShader.setUniform1i("uTexture", 0);
+    debugShader.setUniform1f("uScale", scale);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 bool polyMode = false;
@@ -144,7 +195,6 @@ void handleInput()
 
 glm::mat4 view{};
 Shader oceanShader{};
-Shader debugShader{};
 
 void updateCameraUniforms()
 {
@@ -162,6 +212,7 @@ int32_t main(int argc, char* argv[])
     camera.init(90.0f, {0.0f, 1.0f, 0.0f}, 5.0f, 0.25f);
     createGeometry();
     createGaussianRandomTexture();
+    createDebugGeometry();
 
     oceanShader.create();
     oceanShader.addShader("FFT-Ocean/res/shader/ocean.vert", GL_VERTEX_SHADER);
@@ -176,7 +227,7 @@ int32_t main(int argc, char* argv[])
     debugShader.addShader("FFT-Ocean/res/shader/debug.frag", GL_FRAGMENT_SHADER);
     debugShader.compile();
 
-    glm::mat4 debugProjection = glm::ortho<float_t>(0.0f, static_cast<float_t>(width), static_cast<float_t>(height), 0.0f);
+    glm::mat4 debugProjection = glm::ortho<float_t>(0.0f, static_cast<float_t>(width), static_cast<float_t>(height), 0.0f, -1.0f, 1.0f);
     debugShader.setUniformMat4f("uProjection", debugProjection);
 
     float clearColor[]
@@ -212,6 +263,10 @@ int32_t main(int argc, char* argv[])
         oceanShader.bind();
         glBindVertexArray(oceanVAO);
         glDrawElements(GL_TRIANGLES, oceanIndices.size(), GL_UNSIGNED_INT, nullptr);
+
+        debugShader.bind();
+
+        drawDebugQuad({64.0f, 64.0f}, 2.0f, randomTexture);
 
         window.render();
         handleInput();
